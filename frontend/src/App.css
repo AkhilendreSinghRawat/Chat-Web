@@ -1,0 +1,139 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.height100 {
+  height: 100vh;
+}
+
+.App {
+  /* background-color: rgb(13, 23, 33); */
+  background-color: lightblue;
+}
+
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+}
+.usernameExistText {
+  color: darkRed;
+}
+
+.welcomeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.inputMessage {
+  display: flex;
+  width: 50%;
+  flex-wrap: wrap;
+  cursor: text;
+  background-color: white;
+  border: solid 1px black;
+}
+.inputText {
+  margin: 0px 3px;
+}
+.submitButton {
+  background-color: black;
+  color: white;
+  flex: 1;
+  cursor: pointer;
+}
+.welcomeUserList {
+  width: fit-content;
+  transform: rotate(180deg);
+  margin-left: 2vw;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 15vh;
+}
+.welcomeInputContainer {
+  height: 6%;
+  display: flex;
+  flex-direction: row;
+}
+.listContent {
+  transform: rotate(-180deg);
+  padding: 2vh 5vw;
+  background-color: blue;
+  border: solid 1px black;
+}
+.listContent:hover {
+  background-color: blueviolet;
+}
+.listContentActive {
+  background-color: blueviolet;
+}
+.welcomeUserList::-webkit-scrollbar {
+  width: 5px;
+}
+.welcomeUserList::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #d9eee1;
+  border-radius: 10px;
+}
+.welcomeUserList::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
+}
+.chatMessageContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1vh 1vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.chatMessageContainer::-webkit-scrollbar {
+  width: 5px;
+}
+.chatMessageContainer::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+.chatMessageContainer::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
+}
+.ChatInputBox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+.active {
+  animation: blinking 0.5s infinite alternate-reverse ease;
+  width: 10px;
+  height: 20px;
+}
+.pill {
+  background-color: cornflowerblue;
+  height: inherit;
+  padding: 0.2vh 0.2vw;
+}
+.ChatInputContainer {
+  display: flex;
+  flex-direction: column;
+}
+.modalHover:hover {
+  background-color: #ddd;
+}
+
+@keyframes blinking {
+  from {
+    border-bottom: none;
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+    border-bottom: 3px solid black;
+  }
+}
