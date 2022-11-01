@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 
 const Home = ({ socket }) => {
+  const isDarkMode = useSelector((state) => state.darkMode.value)
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [userExistVisible, setUserExistVisible] = useState(false)
@@ -35,7 +37,9 @@ const Home = ({ socket }) => {
   return (
     <div className="center height100 homeContainer">
       {userExistVisible && (
-        <div className="usernameExistText">UserName Already Exist...</div>
+        <div style={{ color: isDarkMode ? 'white' : 'darkRed' }}>
+          UserName Already Exist...
+        </div>
       )}
       <div
         style={{

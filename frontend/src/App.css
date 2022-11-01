@@ -7,17 +7,9 @@
   height: 100vh;
 }
 
-.App {
-  /* background-color: rgb(13, 23, 33); */
-  background-color: lightblue;
-}
-
 .homeContainer {
   display: flex;
   flex-direction: column;
-}
-.usernameExistText {
-  color: darkRed;
 }
 
 .welcomeContainer {
@@ -125,6 +117,10 @@
 }
 .modalHover:hover {
   background-color: #ddd;
+}
+
+.modalHoverDark:hover {
+  background-color: rgb(0, 183, 255);
 }
 
 @keyframes blinking {

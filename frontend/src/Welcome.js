@@ -6,21 +6,13 @@ import Modal from 'react-modal'
 import { FiChevronsDown } from 'react-icons/fi'
 import { GiCrossedBones } from 'react-icons/gi'
 import VideoCalls from './VideoCalls'
-
-const customStyles = {
-  content: {
-    width: 'fit-content',
-    height: 'fit-content',
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-}
+import { useDispatch, useSelector } from 'react-redux'
+import DarkModeToggle from 'react-dark-mode-toggle'
+import { changeMode } from './redux/slices/modeSlice'
 
 const Welcome = ({ socket }) => {
+  const isDarkMode = useSelector((state) => state.darkMode.value)
+  const dispatch = useDispatch()
   const { state } = useLocation()
   const [allState, setAllState] = useState({
     modalIsOpen: false,
@@ -97,6 +89,25 @@ const Welcome = ({ socket }) => {
     }
   }, [chatMessages])
 
+  const onToggle = () => {
+    dispatch(changeMode(isDarkMode ? false : true))
+  }
+
+  const customStyles = {
+    content: {
+      width: 'fit-content',
+      height: 'fit-content',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: isDarkMode ? '#0074B7' : 'white',
+      color: isDarkMode ? 'white' : 'black',
+    },
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       <div
@@ -143,7 +154,7 @@ const Welcome = ({ socket }) => {
             {allState?.selectedItem?.deleted ? null : (
               <span
                 style={{ padding: '1vh 1vw' }}
-                className="modalHover"
+                className={isDarkMode ? 'modalHoverDark' : 'modalHover'}
                 onClick={() => {
                   navigator.clipboard.writeText(allState?.selectedItem?.msg)
                   closeModal()
@@ -154,7 +165,7 @@ const Welcome = ({ socket }) => {
             )}
             <span
               style={{ padding: '1vh 1vw' }}
-              className="modalHover"
+              className={isDarkMode ? 'modalHoverDark' : 'modalHover'}
               onClick={() => deleteMessage(allState?.selectedItem?.id)}
             >
               Delete For Me
@@ -163,7 +174,7 @@ const Welcome = ({ socket }) => {
             !allState?.selectedItem?.type ? null : (
               <span
                 style={{ padding: '1vh 1vw' }}
-                className="modalHover"
+                className={isDarkMode ? 'modalHoverDark' : 'modalHover'}
                 onClick={deleteForEveryone}
               >
                 Delete For Everyone
@@ -171,6 +182,28 @@ const Welcome = ({ socket }) => {
             )}
           </div>
         </Modal>
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            backgroundColor: '#256D85',
+            width: '100vw',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              padding: '1vh 2vw',
+            }}
+          >
+            <DarkModeToggle
+              onChange={onToggle}
+              checked={isDarkMode}
+              size={'10vh'}
+            />
+          </div>
+        </div>
         <div className="chatMessageContainer">
           {chatMessages?.map((item, index) => {
             return (
@@ -193,8 +226,8 @@ const Welcome = ({ socket }) => {
                   ...(item?.type === 'self'
                     ? {
                         alignSelf: 'flex-end',
-                        color: '#1D2A35',
-                        backgroundColor: '#D9EEE1',
+                        color: isDarkMode ? 'white' : '#1D2A35',
+                        backgroundColor: isDarkMode ? '#0074B7' : '#D9EEE1',
                         borderRadius: '1vw 0vw 1vw 1vw',
                       }
                     : {}),

@@ -4,6 +4,7 @@ import { GiCrossedBones } from 'react-icons/gi'
 import { FcVideoCall } from 'react-icons/fc'
 import $ from 'jquery'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 const ChatInput = ({
   socket,
@@ -14,6 +15,7 @@ const ChatInput = ({
   recipients,
   setRecipients,
 }) => {
+  const isDarkMode = useSelector((state) => state.darkMode.value)
   const ref = useRef()
   const attachFileRef = useRef()
   const chatInputRef = useRef()
@@ -347,7 +349,7 @@ const ChatInput = ({
         <div
           style={{
             display: 'flex',
-            backgroundColor: 'white',
+            backgroundColor: isDarkMode ? 'skyblue' : 'white',
             flex: 3,
             flexWrap: 'wrap',
             height: 'fit-content',
@@ -381,7 +383,7 @@ const ChatInput = ({
               onClick={() => setVideoCall(true)}
               style={{
                 display: 'flex',
-                backgroundColor: 'white',
+                backgroundColor: isDarkMode ? 'skyblue' : 'white',
                 height: '6vh',
                 padding: '0vh 0.5vw',
                 flex: 1,
@@ -404,7 +406,7 @@ const ChatInput = ({
             id="OpenImgUpload"
             style={{
               display: 'flex',
-              backgroundColor: 'white',
+              backgroundColor: isDarkMode ? 'skyblue' : 'white',
               height: '6vh',
               padding: '0vh 0.5vw',
               flex: 1,
@@ -446,7 +448,8 @@ const ChatInput = ({
             minHeight: '6vh',
             justifyContent: 'center',
             alignItems: 'center ',
-            backgroundColor: '#04AA6D',
+            backgroundColor: isDarkMode ? '#059DC0' : '#04AA6D',
+            border: 0,
             color: 'white',
             alignSelf: 'flex-end',
           }}
