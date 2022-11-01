@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
+import DarkModeNav from './darkModeNav'
 
 const Home = ({ socket }) => {
   const isDarkMode = useSelector((state) => state.darkMode.value)
@@ -35,52 +36,55 @@ const Home = ({ socket }) => {
   }, [navigate, socket, username])
 
   return (
-    <div className="center height100 homeContainer">
-      {userExistVisible && (
-        <div style={{ color: isDarkMode ? 'white' : 'darkRed' }}>
-          UserName Already Exist...
-        </div>
-      )}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <input
+    <div>
+      <DarkModeNav />
+      <div className="center height100 homeContainer">
+        {userExistVisible && (
+          <div style={{ color: isDarkMode ? 'white' : 'darkRed' }}>
+            UserName Already Exist...
+          </div>
+        )}
+        <div
           style={{
-            outline: 'none',
-            width: '20vw',
-            padding: '1vh 1vw',
-            marginBottom: '1vh',
-            borderRadius: '10vh',
-            border: '0',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
-          onKeyDown={(e) => {
-            if (e.code === 'Enter') sendData()
-          }}
-          placeholder="Input Your Name"
-          value={username}
-          onChange={(e) => {
-            if (e.target.value !== ' ') {
-              setUsername(e.target.value)
-            }
-          }}
-          autoFocus="autofocus"
-        />
-        <button
-          style={{
-            width: '10vw',
-            padding: '1vh 1vw',
-            backgroundColor: 'beige',
-            borderRadius: '10vh',
-            border: '1px solid black',
-          }}
-          onClick={sendData}
         >
-          Join
-        </button>
+          <input
+            style={{
+              outline: 'none',
+              width: '20vw',
+              padding: '1vh 1vw',
+              marginBottom: '1vh',
+              borderRadius: '10vh',
+              border: '0',
+            }}
+            onKeyDown={(e) => {
+              if (e.code === 'Enter') sendData()
+            }}
+            placeholder="Input Your Name"
+            value={username}
+            onChange={(e) => {
+              if (e.target.value !== ' ') {
+                setUsername(e.target.value)
+              }
+            }}
+            autoFocus="autofocus"
+          />
+          <button
+            style={{
+              width: '10vw',
+              padding: '1vh 1vw',
+              backgroundColor: isDarkMode?'#BFD7ED':'beige',
+              borderRadius: '10vh',
+              border: '1px solid black',
+            }}
+            onClick={sendData}
+          >
+            Join
+          </button>
+        </div>
       </div>
     </div>
   )

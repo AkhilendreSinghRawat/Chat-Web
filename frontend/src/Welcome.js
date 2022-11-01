@@ -6,13 +6,11 @@ import Modal from 'react-modal'
 import { FiChevronsDown } from 'react-icons/fi'
 import { GiCrossedBones } from 'react-icons/gi'
 import VideoCalls from './VideoCalls'
-import { useDispatch, useSelector } from 'react-redux'
-import DarkModeToggle from 'react-dark-mode-toggle'
-import { changeMode } from './redux/slices/modeSlice'
+import { useSelector } from 'react-redux'
+import DarkModeNav from './darkModeNav'
 
 const Welcome = ({ socket }) => {
   const isDarkMode = useSelector((state) => state.darkMode.value)
-  const dispatch = useDispatch()
   const { state } = useLocation()
   const [allState, setAllState] = useState({
     modalIsOpen: false,
@@ -88,10 +86,6 @@ const Welcome = ({ socket }) => {
       ref.current?.scrollIntoView({ behavior: 'smooth' })
     }
   }, [chatMessages])
-
-  const onToggle = () => {
-    dispatch(changeMode(isDarkMode ? false : true))
-  }
 
   const customStyles = {
     content: {
@@ -182,28 +176,7 @@ const Welcome = ({ socket }) => {
             )}
           </div>
         </Modal>
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            backgroundColor: '#256D85',
-            width: '100vw',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              padding: '1vh 2vw',
-            }}
-          >
-            <DarkModeToggle
-              onChange={onToggle}
-              checked={isDarkMode}
-              size={'10vh'}
-            />
-          </div>
-        </div>
+        <DarkModeNav width={videoCall ? '25vw' : '100vw'} />
         <div className="chatMessageContainer">
           {chatMessages?.map((item, index) => {
             return (
