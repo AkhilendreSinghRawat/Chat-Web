@@ -10,7 +10,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 app.use(
   cors({
-    origin: 'http://192.168.3.39:3000',
+    origin: '*',
   })
 )
 app.use(bodyParser.json({ limit: 1024 * 1024 * 100, type: 'application/json' }))
@@ -26,7 +26,7 @@ const { v4: uuidv4 } = require('uuid')
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://192.168.3.39:3000',
+    origin: '*',
   },
 })
 const color = require('colors')
